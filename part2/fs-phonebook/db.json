@@ -1,0 +1,14 @@
+{
+  "persons": [
+    {
+      "name": "Yaroslav Burda",
+      "number": "222-222-22-11",
+      "id": 1
+    },
+    {
+      "name": "Elza Burda",
+      "number": "098-738-76-03",
+      "id": 2
+    }
+  ]
+}
