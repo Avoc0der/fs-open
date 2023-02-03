@@ -14,6 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState(null);
+  const [error, setError] = useState(false);
 
   const inputHandler = ({ currentTarget: { value } }) => {
     setNewName(value);
@@ -70,7 +71,14 @@ const App = () => {
         setMessage(`Added ${personObject.name}`);
         setTimeout(() => {
           setMessage(null);
-        }, 3000);
+        }, 5000);
+      }).catch(error => {
+        setMessage(error.response.data.error);
+        setError(true)
+        setTimeout(() => {
+          setMessage(null);
+          setError(false)
+        }, 5000);
       });
     }
   };
@@ -85,7 +93,6 @@ const App = () => {
 
   const removePersons = ({ name, id: removeId }) => {
     if (window.confirm(`Delete ${name}?`)) {
-      console.log(removeId);
       personsServices.remove(removeId).then(({ status }) => {
         if (status === 200) {
           setPersons(persons.filter(({ id }) => id !== removeId));
@@ -103,7 +110,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message} />
+      <Notification error={error} message={message} />
       <Filter searchValue={search} searchHandler={searchHandler} />
       <h3>Add a new</h3>
       <PersonForm

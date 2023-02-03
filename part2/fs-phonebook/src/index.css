@@ -8,3 +8,9 @@
   text-transform: uppercase;
   text-align: center;
 }
+
+.message.error {
+  border: 3px solid red;
+  background: lightgray;
+  color: lightcoral;
+}
